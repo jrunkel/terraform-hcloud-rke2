@@ -157,6 +157,12 @@ variable "enable_nginx_modsecurity_waf" {
   description = "Defines whether the nginx modsecurity waf should be enabled."
 }
 
+variable "enable_nginx_useproxy" {
+  type        = bool
+  default     = false
+  description = "Defines whether the nginx useproxy should be enabled."
+}
+
 variable "expose_kubernetes_metrics" {
   type        = bool
   default     = false

@@ -7,7 +7,4 @@ spec:
   valuesContent: |-
     controller:
       config:
-        enable-modsecurity: "true"
-        enable-owasp-modsecurity-crs: "true"
-        modsecurity-snippet: |-
-          SecRuleEngine On
+        use-proxy-protocol: "true"
