@@ -30,6 +30,7 @@ resource "hcloud_load_balancer_service" "web_lb_tcp_80_service" {
   listen_port      = 80
   destination_port = 80
   depends_on       = [hcloud_load_balancer_target.web_lb_targets, hcloud_server.worker]
+  proxyprotocol    = true
 }
 
 resource "hcloud_load_balancer_service" "web_lb_tcp_https_service" {
@@ -37,6 +38,7 @@ resource "hcloud_load_balancer_service" "web_lb_tcp_https_service" {
   protocol         = "tcp"
   listen_port      = 443
   destination_port = 443
+  proxyprotocol    = true
   depends_on       = [hcloud_load_balancer_target.web_lb_targets]
 }
 
@@ -46,5 +48,6 @@ resource "hcloud_load_balancer_service" "web_lb_service" {
   protocol         = "tcp"
   listen_port      = tonumber(each.value)
   destination_port = tonumber(each.value)
+  proxyprotocol    = true
   depends_on       = [hcloud_load_balancer_target.web_lb_targets]
 }

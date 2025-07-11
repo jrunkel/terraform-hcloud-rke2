@@ -22,6 +22,10 @@ output "management_lb_ipv4" {
   value = hcloud_load_balancer.management_lb.ipv4
 }
 
+output "web_lb_ipv4" {
+  value = hcloud_load_balancer.web_lb.ipv4
+}
+
 output "management_network_id" {
   value = hcloud_network.main.id
 }
