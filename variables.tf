@@ -66,6 +66,12 @@ variable "additional_lb_service_ports" {
   description = "Define additional service ports for the management cluster loadbalancer."
 }
 
+variable "additional_web_lb_service_ports" {
+  type        = list(string)
+  default     = []
+  description = "Define additional service ports for the management cluster loadbalancer."
+}
+
 variable "network_zone" {
   type        = string
   default     = "eu-central"
