@@ -7,7 +7,19 @@ spec:
   valuesContent: |-
     controller:
       config:
+%{ if USESECUR ~}
         enable-modsecurity: "true"
         enable-owasp-modsecurity-crs: "true"
         modsecurity-snippet: |-
           SecRuleEngine On
+%{ endif ~}
+%{ if USEPROXY ~}
+        use-proxy-protocol: "true"
+%{ endif ~}
+%{ if SERVICES != null ~}
+    tcp:
+      # Services will automatically be specified in kube-system/rke2-ingress-nginx-tcp
+%{ for i, service in SERVICES ~}
+      "${service.port}": "${service.service}"%{ if i < length(SERVICES) - 1 },%{ endif }
+%{ endfor ~}
+%{ endif ~}

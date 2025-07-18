@@ -1,3 +1,21 @@
+variable "additional_tcp_services" {
+  description = "List of port/service pairs"
+  type = list(
+    object({
+      port   = string
+      service = string
+    })
+  )
+}
+
+variable "enable_nginx_useproxy" {
+  type        = bool
+  default     = false
+  description = "Defines whether the nginx useproxy should be enabled."
+}
+
+###
+
 variable "hetzner_token" {
   type        = string
   description = "Hetzner Cloud API Token"
@@ -155,12 +173,6 @@ variable "enable_nginx_modsecurity_waf" {
   type        = bool
   default     = false
   description = "Defines whether the nginx modsecurity waf should be enabled."
-}
-
-variable "enable_nginx_useproxy" {
-  type        = bool
-  default     = false
-  description = "Defines whether the nginx useproxy should be enabled."
 }
 
 variable "expose_kubernetes_metrics" {
