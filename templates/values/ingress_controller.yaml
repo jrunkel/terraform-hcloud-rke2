@@ -7,6 +7,8 @@ spec:
   valuesContent: |-
     controller:
       config:
+        hsts-max-age: "31536000"
+        large-client-header-buffers: "4 32k"
 %{ if USESECUR ~}
         enable-modsecurity: "true"
         enable-owasp-modsecurity-crs: "true"
