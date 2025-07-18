@@ -1,6 +1,6 @@
 resource "kubernetes_ingress_v1" "oidc" {
   depends_on = [hcloud_load_balancer_service.management_lb_k8s_service]
-  count      = var.expose_oidc_issuer_url != null ? 1 : 0
+  count      = var.expose_oidc_issuer_url ? 1 : 0
 
   metadata {
     name      = "oidc-ingress"
