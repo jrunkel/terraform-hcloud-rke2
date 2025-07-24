@@ -24,6 +24,25 @@ resource "hcloud_load_balancer_target" "management_lb_targets" {
   ]
 }
 
+resource "hcloud_load_balancer_service" "management_lb_tcp_80_service" {
+  load_balancer_id = hcloud_load_balancer.management_lb.id
+  protocol         = "tcp"
+  listen_port      = 80
+  destination_port = 80
+  depends_on       = [hcloud_load_balancer_target.management_lb_targets]
+  proxyprotocol    = true
+}
+
+resource "hcloud_load_balancer_service" "management_lb_tcp_https_service" {
+  load_balancer_id = hcloud_load_balancer.management_lb.id
+  protocol         = "tcp"
+  listen_port      = 443
+  destination_port = 443
+  proxyprotocol    = true
+  depends_on       = [hcloud_load_balancer_target.management_lb_targets]
+}
+
+
 resource "hcloud_load_balancer_service" "management_lb_k8s_service" {
   load_balancer_id = hcloud_load_balancer.management_lb.id
   protocol         = "tcp"
