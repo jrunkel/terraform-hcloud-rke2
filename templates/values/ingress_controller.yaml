@@ -7,6 +7,9 @@ spec:
   valuesContent: |-
     controller:
       config:
+%{ for key, value in NGINX_CONFIG ~}
+        ${key}: "${value}"
+%{ endfor ~}
 %{ if USESECUR ~}
         enable-modsecurity: "true"
         enable-owasp-modsecurity-crs: "true"
