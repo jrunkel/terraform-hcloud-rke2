@@ -14,6 +14,12 @@ variable "enable_nginx_useproxy" {
   description = "Defines whether the nginx useproxy should be enabled."
 }
 
+variable "ingress_nginx_config" {
+  type        = map(string)
+  default     = {}
+  description = "Additional nginx ingress controller config options (e.g., hsts-max-age, large-client-header-buffers)."
+}
+
 ###
 
 variable "hetzner_token" {
