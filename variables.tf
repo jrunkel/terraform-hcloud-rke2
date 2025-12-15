@@ -86,7 +86,7 @@ variable "lb_location" {
 
 variable "management_lb_type" {
   type        = string
-  default     = "lb11"
+  default     = "lb21"
   description = "Define the management load balancer type (lb11 = 5 services, lb21 = 10 services, lb31 = 25 services)."
 }
 
