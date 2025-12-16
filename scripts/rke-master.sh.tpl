@@ -20,6 +20,8 @@ tls-san:
 cloud-provider-name: external
 cni: ${RKE2_CNI}
 node-ip: $NODE_IP
+node-taint:
+  - "node-role.kubernetes.io/control-plane:NoSchedule"
 %{ if EXPOSE_METRICS }
 etcd-expose-metrics: true
 kube-controller-manager-arg:
