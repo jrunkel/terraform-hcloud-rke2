@@ -3,7 +3,7 @@ data "remote_file" "kubeconfig" {
     time_sleep.wait_30_seconds
   ]
   conn {
-    host        = hcloud_load_balancer.management_lb.ipv4
+    host        = local.management_lb_ipv4
     user        = "root"
     private_key = tls_private_key.machines.private_key_openssh
     sudo        = true

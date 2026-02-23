@@ -5,7 +5,7 @@ resource "random_string" "master_node_suffix" {
 }
 
 resource "time_sleep" "wait_30_seconds" {
-  depends_on = [hcloud_load_balancer_service.management_lb_ssh_service]
+  depends_on = [hcloud_server.master]
 
   create_duration = "30s"
 }
