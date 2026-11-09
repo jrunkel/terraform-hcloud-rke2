@@ -252,3 +252,21 @@ variable "expose_oidc_issuer_url" {
   default     = false
   description = "The exposed oidc issuer url. (If set enables oidc)"
 }
+
+variable "firewall_ids" {
+  type        = list(number)
+  default     = []
+  description = "IDs of Hetzner Cloud Firewalls to attach to all master and worker nodes at creation time. Firewalls only filter the public interfaces; cluster traffic on the private network is unaffected."
+}
+
+variable "canal_flannel_iface_regex" {
+  type        = string
+  default     = ""
+  description = "Regex for the interface flannel (canal) uses for VXLAN between nodes, e.g. \"^(enp7s0|ens10)$\" for the Hetzner private network. Empty keeps the chart default (interface with the default route = public)."
+}
+
+variable "canal_veth_mtu" {
+  type        = number
+  default     = null
+  description = "Pod veth MTU for canal (calico.vethuMTU). Set to 1400 when VXLAN runs over the Hetzner private network (MTU 1450)."
+}

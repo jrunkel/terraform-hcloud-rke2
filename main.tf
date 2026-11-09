@@ -24,7 +24,8 @@ resource "hcloud_server" "master" {
   server_type = var.master_node_server_type
   image       = var.master_node_image
   location    = element(var.node_locations, count.index)
-  ssh_keys    = [hcloud_ssh_key.main.id]
+  ssh_keys     = [hcloud_ssh_key.main.id]
+  firewall_ids = var.firewall_ids
   user_data = templatefile("${path.module}/scripts/rke-master.sh.tpl", {
     EXPOSE_METRICS       = var.cluster_configuration.monitoring_stack.preinstall || var.expose_kubernetes_metrics
     RKE_TOKEN            = random_password.rke2_token.result
@@ -79,7 +80,8 @@ resource "hcloud_server" "worker" {
   server_type = var.worker_node_server_type
   image       = var.worker_node_image
   location    = element(var.node_locations, count.index)
-  ssh_keys    = [hcloud_ssh_key.main.id]
+  ssh_keys     = [hcloud_ssh_key.main.id]
+  firewall_ids = var.firewall_ids
   user_data = templatefile("${path.module}/scripts/rke-worker.sh.tpl", {
     RKE_TOKEN            = random_password.rke2_token.result
     SERVER_ADDRESS       = hcloud_load_balancer.management_lb.ipv4

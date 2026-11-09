@@ -1,0 +1,16 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: rke2-canal
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    flannel:
+      # Run VXLAN over the private network instead of the interface with the
+      # default route (the public interface on Hetzner).
+      regexIface: "${IFACE_REGEX}"
+%{ if VETH_MTU != null ~}
+    calico:
+      # Private network MTU (1450) minus VXLAN overhead (50).
+      vethuMTU: ${VETH_MTU}
+%{ endif ~}
