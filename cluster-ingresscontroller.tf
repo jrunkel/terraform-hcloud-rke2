@@ -4,6 +4,7 @@ resource "kubectl_manifest" "ingress_configuration" {
     USESECUR     = var.enable_nginx_modsecurity_waf,
     USEPROXY     = var.enable_nginx_useproxy,
     SERVICES     = var.additional_tcp_services,
-    NGINX_CONFIG = var.ingress_nginx_config
+    NGINX_CONFIG = var.ingress_nginx_config,
+    TOLERATE_CP  = var.ingress_on_control_plane
   })
 }

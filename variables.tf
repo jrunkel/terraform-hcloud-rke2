@@ -270,3 +270,9 @@ variable "canal_veth_mtu" {
   default     = null
   description = "Pod veth MTU for canal (calico.vethuMTU). Set to 1400 when VXLAN runs over the Hetzner private network (MTU 1450)."
 }
+
+variable "ingress_on_control_plane" {
+  type        = bool
+  default     = false
+  description = "Let the rke2-ingress-nginx DaemonSet tolerate the control-plane NoSchedule taint, so ingress pods (hostPorts 80/443 and additional_tcp_services) also run on the masters behind the management LB. Other workloads stay off the masters."
+}

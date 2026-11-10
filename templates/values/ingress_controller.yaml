@@ -6,6 +6,12 @@ metadata:
 spec:
   valuesContent: |-
     controller:
+%{ if TOLERATE_CP ~}
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+%{ endif ~}
       config:
 %{ for key, value in NGINX_CONFIG ~}
         ${key}: "${value}"
