@@ -276,3 +276,15 @@ variable "ingress_on_control_plane" {
   default     = false
   description = "Let the rke2-ingress-nginx DaemonSet tolerate the control-plane NoSchedule taint, so ingress pods (hostPorts 80/443 and additional_tcp_services) also run on the masters behind the management LB. Other workloads stay off the masters."
 }
+
+variable "management_lb_http" {
+  type        = bool
+  default     = true
+  description = "Expose port 80 (proxy protocol) on the management LB, forwarded to the ingress on the masters. Needed e.g. for HTTP-01 challenges of hostnames that point at the management LB. Requires ingress_on_control_plane to be useful."
+}
+
+variable "management_lb_https" {
+  type        = bool
+  default     = true
+  description = "Expose port 443 (proxy protocol) on the management LB, forwarded to the ingress on the masters. Not needed when all sites point at the web LB."
+}

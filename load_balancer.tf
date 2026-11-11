@@ -25,6 +25,7 @@ resource "hcloud_load_balancer_target" "management_lb_targets" {
 }
 
 resource "hcloud_load_balancer_service" "management_lb_tcp_80_service" {
+  count            = var.management_lb_http ? 1 : 0
   load_balancer_id = hcloud_load_balancer.management_lb.id
   protocol         = "tcp"
   listen_port      = 80
@@ -34,6 +35,7 @@ resource "hcloud_load_balancer_service" "management_lb_tcp_80_service" {
 }
 
 resource "hcloud_load_balancer_service" "management_lb_tcp_https_service" {
+  count            = var.management_lb_https ? 1 : 0
   load_balancer_id = hcloud_load_balancer.management_lb.id
   protocol         = "tcp"
   listen_port      = 443
@@ -74,4 +76,14 @@ resource "hcloud_load_balancer_service" "management_lb_service" {
   listen_port      = tonumber(each.value)
   destination_port = tonumber(each.value)
   depends_on       = [hcloud_load_balancer_target.management_lb_targets]
+}
+
+moved {
+  from = hcloud_load_balancer_service.management_lb_tcp_80_service
+  to   = hcloud_load_balancer_service.management_lb_tcp_80_service[0]
+}
+
+moved {
+  from = hcloud_load_balancer_service.management_lb_tcp_https_service
+  to   = hcloud_load_balancer_service.management_lb_tcp_https_service[0]
 }
